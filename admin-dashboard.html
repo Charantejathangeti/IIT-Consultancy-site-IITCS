@@ -191,17 +191,107 @@
       font-weight: 500;
     }
     
-    /* RESPONSIVE */
+    /* ✅ MOBILE RESPONSIVE UPDATES */
     @media (max-width: 768px) {
-      nav ul { flex-wrap: wrap; gap: 0.8rem; }
-      .dashboard { padding: 1.5rem 1rem; }
-      .stats-grid { grid-template-columns: 1fr; }
-      main { margin: 1.5rem auto; }
+      /* MOBILE NAVIGATION */
+      .menu-toggle {
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 4px;
+        padding: 0.5rem;
+      }
+      .menu-toggle span {
+        width: 25px;
+        height: 3px;
+        background: var(--white);
+        border-radius: 2px;
+        transition: 0.3s;
+      }
+      nav ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--black);
+        padding: 1rem;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        gap: 0;
+      }
+      nav ul.active {
+        display: flex;
+      }
+      nav ul li {
+        margin: 0.5rem 0;
+        width: 100%;
+      }
+      nav a {
+        display: block;
+        padding: 1rem;
+        text-align: center;
+        font-size: 1rem;
+      }
+
+      /* DASHBOARD MOBILE */
+      body { font-size: 16px; }
+      main { margin: 1rem auto; padding: 0 0.5rem; }
+      .dashboard { 
+        padding: 1.5rem 1rem; 
+        margin-bottom: 1rem;
+        border-radius: 8px;
+      }
+      .stats-grid { 
+        grid-template-columns: 1fr; 
+        gap: 1rem; 
+      }
+      .stat-card { 
+        padding: 1.5rem 1rem; 
+      }
+      .stat-number { 
+        font-size: 1.8rem; 
+      }
+      .stat-icon { 
+        width: 45px; 
+        height: 45px; 
+        font-size: 1.3rem; 
+      }
+
+      /* TABLE MOBILE */
+      .table-container { 
+        border-radius: 8px; 
+        margin-bottom: 1rem;
+        overflow-x: auto;
+      }
+      .table-header { 
+        padding: 1rem; 
+        font-size: 1rem; 
+      }
+      th, td { 
+        padding: 0.75rem 0.5rem; 
+        font-size: 0.9rem; 
+      }
+      table { 
+        min-width: 500px; 
+      }
+
+      /* FOOTER MOBILE */
+      footer { 
+        padding: 1rem 0.5rem; 
+        margin-top: 2rem; 
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 0 0.75rem; }
+      .dashboard { padding: 1.25rem 0.75rem; }
+      .stat-number { font-size: 1.6rem; }
     }
   </style>
 </head>
 <body>
-  <!-- HEADER - IDENTICAL TO index.html & about.html -->
+  <!-- HEADER WITH MOBILE MENU TOGGLE -->
   <header>
     <div class="container">
       <nav>
@@ -212,9 +302,14 @@
           <li><a href="for-candidates.html">Candidates</a></li>
           <li><a href="talent-hub.html">Talent Hub</a></li>
           <li><a href="about.html">About</a></li>
-          <li><a href="login.html" class="active">Admin Dashboard</a></li>
+          <li><a href="login.html" class="active">Dashboard</a></li>
           <li><a href="signup.html">Sign Up</a></li>
         </ul>
+        <div class="menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </nav>
     </div>
   </header>
@@ -302,5 +397,19 @@
       <p class="founder-text">Founded by P. Rajinikanth Reddy</p>
     </div>
   </footer>
+
+  <!-- MOBILE MENU TOGGLE SCRIPT -->
+  <script>
+    document.querySelector('.menu-toggle').addEventListener('click', () => {
+      document.querySelector('nav ul').classList.toggle('active');
+    });
+    
+    // Close menu when clicking on a link
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.querySelector('nav ul').classList.remove('active');
+      });
+    });
+  </script>
 </body>
 </html>
